@@ -1,0 +1,92 @@
+.root {
+  display: inline-block;
+  flex-shrink: 0;
+  vertical-align: middle;
+  overflow: visible;
+}
+
+.dot {
+  fill: currentColor;
+  opacity: var(--dot-min);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation-duration: var(--dot-duration);
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: both;
+}
+
+.static {
+  animation: none;
+}
+
+.blink {
+  animation-name: blink;
+}
+
+.trail {
+  animation-name: trail;
+  animation-timing-function: linear;
+}
+
+.twinkle {
+  animation-name: twinkle;
+}
+
+.grow {
+  animation-name: grow;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: var(--dot-min);
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes trail {
+  0% {
+    opacity: 1;
+  }
+  45%,
+  100% {
+    opacity: var(--dot-min);
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  30%,
+  100% {
+    opacity: var(--dot-min);
+  }
+  12% {
+    opacity: 1;
+  }
+}
+
+@keyframes grow {
+  0%,
+  100% {
+    opacity: var(--dot-min);
+    transform: scale(0.7);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+/* Reduced motion keeps a slow, uniform breathe so the loader still reads as "busy". */
+@media (prefers-reduced-motion: reduce) {
+  .dot {
+    animation-name: blink;
+    animation-duration: 2400ms;
+    animation-timing-function: ease-in-out;
+    animation-delay: 0s !important;
+    transform: none;
+  }
+}
